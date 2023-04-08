@@ -1,27 +1,45 @@
 import style from "./Card.module.css";
 import { Link } from 'react-router-dom';
-import { agregar } from "../../redux/actions";
-import { remover } from "../../redux/actions";
-import {connect} from "react-redux"
+import { removeFavorite,getFavorites } from "../../redux/actions";
 import { useState,useEffect } from "react";
+import { connect, useDispatch } from "react-redux";
+import axios from "axios";
 
-const Card =({id,name,species,gender,image,onClose,myFavorites,agregar,remover,}) =>{
-   const [isFav,setIsFav] = useState(false)
-   function handleFavorite(){
-      if(isFav){
+
+function Card({ id, name, species, gender, image, onClose, myFavorites }) {
+   const [isFav, setIsFav] = useState(false);
+   const dispatch = useDispatch();
+   const addFavorite = (character) => {
+      axios
+         .post("http://localhost:3001/rickandmorty/fav", character)
+         .then(console.log("todo ok"))
+   };
+
+   const removeFavorite = async (id) => {
+      await axios.delete(`http://localhost:3001/rickandmorty/fav/${id}`);
+      dispatch(getFavorites());
+   };
+
+   const handleFavorite = () => {
+      if (isFav) {
          setIsFav(false);
-         remover(id)
-      }else{
+         removeFavorite(id);
+      } else {
          setIsFav(true);
-         agregar({
-            id,name,species,gender,image,onClose
-         })
+         //
+         addFavorite({
+         id,
+         name,
+         species,
+         gender,
+         image,
+         });
       }
    };
    useEffect(() => {
       myFavorites.forEach((fav) => {
          if (fav.id === id) {
-            setIsFav(true);
+         setIsFav(true);
          }
       });
    }, [myFavorites]);
@@ -42,22 +60,18 @@ const Card =({id,name,species,gender,image,onClose,myFavorites,agregar,remover,}
          <img clasName={style.image}src={image} alt="" /></>
       </div>
    );
-}
-const mapStateToProps = (state) => {
-  return {
-    myFavorites: state.myFavorites
-  };
 };
-
 const mapDispatchToProps = (dispatch) => {
-  return {
-    agregar: (id) => {
-      dispatch(agregar(id));
-    },
-    remover: (id) => {
-      dispatch(remover(id));
-    },
-  };
+   return {
+      removeFavorite: (id) => {
+         dispatch(removeFavorite(id));
+      },
+   };
+};
+const mapStateToProps = (state) => {
+   return {
+      myFavorites: state.myFavorites,
+   };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Card);

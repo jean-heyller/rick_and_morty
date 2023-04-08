@@ -9,53 +9,65 @@ import Form from './components/Form/Form';
 import Favorites from './components/Favorites/Favoristes';
 
 
-function App () {
- const [characters, setCharacters] = useState([]);
- function onSearch(character) {
-  fetch(`https://rickandmortyapi.com/api/character/${character}`)
-     .then((response) => response.json())
-     .then((data) => {
-        if (data.name) {
-           setCharacters((oldChars) => [...oldChars, data]);
-        } else {
-           window.alert('No hay personajes con ese ID');
-        }
-     });
-} 
-const onClose = (id) => {
-  // porque filter.... no modifica el array original
-  setCharacters(characters.filter((char) => char.id !== id));
-};
-const location = useLocation();
-const navNuevo = location.pathname !=="/";
-const navigate = useNavigate();
-const [access, setAccess] = useState(false);
-const username = 'ejemplo@gmail.com';
-const password = '1password';
+function App() {
+   // ! HOOKS
+   const [characters, setCharacters] = useState([]);
+   const { pathname } = useLocation();
+   const [access, setAccess] = useState(false);
+   const navigate = useNavigate();
+   const username = "heyller-19@outlook.com";
+   const password = "1password";
 
-function login(userData) {
-   if (userData.password === password && userData.username === username) {
-      setAccess(true);
-      navigate('/home');
-   }
-};
-useEffect(() => {
-  !access && navigate('/');
-}, [access]);
+   useEffect(() => {
+      !access && navigate("/");
+   }, [access]);
 
-  return (
-    <div className='App' style={{ padding: '25px' }}>
-    {navNuevo && <Nav onSearch={onSearch}/>}
-    <Routes>
+   // ! EVENT HANDLERS
+   const onSearch = (id) => {
+      const URL_BASE = "http://localhost:3001";
+      // const KEY = "2d0fd52418f5.d3d6077a3b4c1857914f";
+
+      if (characters.find((char) => char.id === id)) {
+         return alert("Personaje repetido");
+      }
+
+      fetch(`${URL_BASE}/onsearch/${id}`)
+         .then((response) => response.json())
+         .then((data) => {
+         if (data.name) {
+            setCharacters((oldChars) => [...oldChars, data]);
+         } else {
+            alert("Algo salió mal");
+         }
+         });
+   };
+
+   const onClose = (id) => {
+   // porque filter.... no modifica el array original
+      setCharacters(characters.filter((char) => char.id !== id));
+   };
+
+   const login = (userData) => {
+      if (userData.username === username && userData.password === password) {
+         setAccess(true);
+         navigate("/home");
+      } else {
+         alert("Credenciales incorrectas");
+      }
+   };
+   return (
+   <div className='App' style={{ padding: '25px' }}>
+   {pathname !== "/" && <Nav onSearch={onSearch} />}
+   <Routes>
       <Route path='/' element= {<Form onSubmit={login} />}/>
       <Route path="/home" element= {<Cards characters={characters} onClose={onClose} />}/>
       <Route path='/favorites' element = {<Favorites />} />
       <Route path='/About' element = {<About />} />
       <Route path='detail/:detailId' element={<Detail/>}/>
-    </Routes>
-    
-    </div>
-  )
-}
+   </Routes>
+   
+   </div>
+   );
+};
 
-export default App
+export default App;
