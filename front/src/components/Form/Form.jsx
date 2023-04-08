@@ -1,5 +1,5 @@
 import React from "react";
-import { useState,useEffect } from "react";
+import { useState } from "react";
 import validate from "./validation";
 import style from "./Form.module.css";
 
@@ -13,19 +13,20 @@ export default function Form({onSubmit}){
      });
 
     function handleInputChange(event) {
-        setUserData({...userData,[event.target.name]:event.target.value})
-    }
+        setUserData({...userData,[event.target.name]:event.target.value});
+    };
     function handleSubmit(event) {
         event.preventDefault();
         const errors = validate(userData);
         setErrors(errors);
         if (Object.keys(errors).length === 0) {
           onSubmit(userData);
-        }
-      } 
+        };
+      };
     return(
-        <div className={style.div}>Crear Formulario
-            <form onSubmit={handleSubmit}>
+        <div className={style.div}>
+            <form onSubmit={handleSubmit} className={style.form}>
+                <h1>Crear Formulario</h1>
                 <div className={style.nombre}>
                 <label className={style.username} htmlFor="username">username:</label>
                 <input onChange ={handleInputChange} value={userData.username}type="text" name="username"/>

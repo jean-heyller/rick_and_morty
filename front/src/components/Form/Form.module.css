@@ -1,18 +1,14 @@
 .div{
-    background-color: #dd2323;
+    border-radius: 30%;
     height: 100px;
-    background-image: linear-gradient(194deg, #FFFFFF 0%, #6284FF 50%, #FF0000 100%);
-    text-align: auto; 
+    text-align: center; 
     font-family: Comic Sans MS; 
     font-weight:bold; 
     font-size: 30px; 
     color: #EBD758; 
     text-shadow: -1px 0 #414D68, 0 1px #414D68, 1px 0 #414D68, 0 -1px #414D68, -2px 2px 0 #414D68, 2px 2px 0 #414D68, 1px 1px #414D68, 2px 2px #414D68, 3px 3px #414D68, 4px 4px #414D68, 5px 5px #414D68, 6px 6px #414D68, 7px 7px #414D68, 8px 8px #414D68, 9px 9px #414D68;
-
 }
 .nombre{
-    background-color: #FFFFFF;
-    background-image: linear-gradient(194deg, #FFFFFF 0%, #6284FF 50%, #FF0000 100%);
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 .username{
@@ -25,8 +21,6 @@
 
 }
 .contraseña{
-    background-color: #FFFFFF;
-    background-image: linear-gradient(194deg, #FFFFFF 0%, #6284FF 50%, #FF0000 100%);
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 .password{
@@ -45,4 +39,8 @@
 	text-decoration: none;
 	font-size: 1vw;
 	background-color: #3498db;
+}
+.form{
+    border: 10px solid black;
+    border-radius: 10px;
 }

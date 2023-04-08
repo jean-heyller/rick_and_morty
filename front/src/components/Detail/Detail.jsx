@@ -1,19 +1,6 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import axios from "axios";
+import useCharacter from "../../hooks/useCharacter";  
 const Detail = () =>{
-  const {detailId}  = useParams()
-  const [character, setCharacter] = useState({})
-  useEffect(() => {
-    const URL_BASE ="https://be-a-rym.up.railway.app/api";
-    const KEY ="85b2f3a6ee15.160fcdbdd50d1f9a27ee";
-
-    axios(`${URL_BASE}/character/${detailId}?key=${KEY}`).then((response) =>
-      setCharacter(response.data)
-    );  
-  }, []);
-  
+  const character = useCharacter();
     return(
         <div>
           {character.name ? (

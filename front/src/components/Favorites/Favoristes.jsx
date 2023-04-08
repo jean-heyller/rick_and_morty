@@ -1,19 +1,19 @@
 import { useSelector,useDispatch} from "react-redux";
 import Card from "../Card/Card";
 import style from "../Favorites/Favorites.module.css"
-import { filterCards,orderCards} from "../../redux/actions"
+import { filterFavorite,orderFavorite} from "../../redux/actions"
 const Favorites = ()=>{
     const  Favorites = useSelector((state)=> state.myFavorites);
     const dispatch = useDispatch();
     
     const ordenar = (e)=>{
         const {value} = e.target
-        dispatch(orderCards(value))
-    }
+        dispatch(orderFavorite(value));
+    };
     const filtrar = (e)=>{
         const  {value } = e.target;
-        dispatch(filterCards(value))
-    }
+        dispatch(filterFavorite(value))
+    };
     return (
         <div className={style.div}>
             <div>
