@@ -5,12 +5,12 @@ const postFav = async (req, res) => {
         const { name, origin, status, image, species, gender } = req.body;
 
         // Verifica si los datos requeridos están presentes
-        if (!name || !origin || !status || !image || !species || !gender) {
+        if (!name || !origin || !image || !species || !gender) {
             return res.status(401).json({ mensaje: 'Faltan datos' });
         }
 
         // Crea un nuevo personaje favorito y lo guarda en la base de datos
-        await Favorite.create({ nombre: name, origen: origin, estado: status, imagen: image, especie: species, género: gender });
+        await Favorite.create({name, origin,image,species, gender });
 
         // Busca todos los personajes favoritos guardados en la base de datos
         const favoritos = await Favorite.findAll();

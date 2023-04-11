@@ -6,7 +6,7 @@ import { connect, useDispatch } from "react-redux";
 import axios from "axios";
 
 
-function Card({ id, name, species, gender, image, onClose, myFavorites }) {
+function Card({id, name,origin, species, gender, image, onClose, myFavorites }) {
    const [isFav, setIsFav] = useState(false);
    const dispatch = useDispatch();
    const addFavorite = (character) => {
@@ -28,8 +28,8 @@ function Card({ id, name, species, gender, image, onClose, myFavorites }) {
          setIsFav(true);
          //
          addFavorite({
-         id,
          name,
+         origin,
          species,
          gender,
          image,

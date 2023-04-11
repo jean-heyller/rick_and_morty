@@ -3,19 +3,22 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
    sequelize.define('Favorite', {
       id:{
-         type: DataTypes.INTEGER,
+         type:DataTypes.INTEGER,
          autoIncrement: true,
-         primaryKey: true,
+         primaryKey:true,
       },
-      email:{
-         type: DataTypes.STRING,
-         unique: true,
-         allownull:false,
-      },
-      password:{
+      name:{
          type:DataTypes.STRING,
          unique:true,
          allownull:false,
       },
+      origin: {
+         type: DataTypes.STRING,
+         allowNull: false,
+      },
+      species: {
+         type: DataTypes.STRING,
+      },
    }, { timestamps: false });
 };
+
