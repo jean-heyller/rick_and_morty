@@ -26,20 +26,14 @@ export default function Form({onSubmit}){
     return(
         <div className={style.div}>
             <form onSubmit={handleSubmit} className={style.form}>
-                <h1>Crear Formulario</h1>
-                <div className={style.nombre}>
+                <h1>Ingresar Usuario</h1>
                 <label className={style.username} htmlFor="username">username:</label>
-                <input onChange ={handleInputChange} value={userData.username}type="text" name="username"/>
+                <input onChange ={handleInputChange} value={userData.username}type="text" name="username" />
                 {errors.username? <span className="error">{errors.username}</span>:null}
-                </div >
-                <div className={style.contraseña}>
                 <label className={style.password}htmlFor="password">password:</label>
                 <input onChange ={handleInputChange} value={userData.password}type="text" name="password"/>
                 {errors.password && <span className="error">{errors.password}</span>}           
-                </div>
-                <div>
                 <button className ={style.btn}type="submit">LOGIN</button>     
-                </div>    
             </form>
         </div>
     );
