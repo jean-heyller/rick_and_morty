@@ -13,7 +13,7 @@ conn.authenticate()
   .catch((error) => console.error('Error de conexión con la base de datos:', error));
 
 
-conn.sync({alter:true})
+conn.sync({force:true})
     .then(()=>{
         server.use(express.json());
         server.use(morgan("dev"));

@@ -1,0 +1,6 @@
+.nav{
+  position: relative; /* Establece el tipo de posicionamiento a relativo para el elemento .nav */
+  display: flex; /* Convierte el elemento .nav en un contenedor flex, lo que permite alinear y distribuir sus elementos hijos de manera flexible */
+  justify-content: space-between; /* Distribuye los elementos hijos a lo largo del eje horizontal con un espacio igual entre ellos */
+  /* Alinea los elementos hijos a lo largo del eje vertical en el centro */
+}
