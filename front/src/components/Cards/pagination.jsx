@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Card from "../Card/Card";
 import style from "./pagination.module.css"
 
-function PaginacionTabla({ datos, filasPorPagina }) {
+function PaginacionTabla({ datos, filasPorPagina ,onClose }) {
   const [paginaActual, setPaginaActual] = useState(1);
   const totalPaginas = Math.ceil(datos.length / filasPorPagina);
 
@@ -50,14 +50,15 @@ function PaginacionTabla({ datos, filasPorPagina }) {
         
         </div>
         <div className={style.cards}>
-        {filasActuales.map(({ image, name, temperament, weight, id }) => {
+        {filasActuales.map(({ image, name, gender, id, species}) => {
           return (
             <Card
               id={id}
               name={name}
-              temperament={temperament}
-              weight={weight}
+              gender={gender}
               image={image}
+              species={species}
+              onClose={onClose}
             />
           );
         })}

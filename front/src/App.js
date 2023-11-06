@@ -7,11 +7,13 @@ import Swal from 'sweetalert2'
 import Cards from './components/Cards/Cards';
 import Nav from "./components/Nav/Nav";
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import About from "./components/About/About";
 import Detail from './components/Detail/Detail';
 import Form from './components/Form/Form';
 import Favorites from './components/Favorites/Favoristes';
+import { getCharacters } from "./redux/actions";
 // Corrección: Debe ser 'Favorites' en lugar de 'Favoritos'
 
 function App() {
@@ -21,6 +23,8 @@ function App() {
    const [access, setAccess] = useState(false); // Variable de estado para gestionar el acceso del usuario
    const navigate = useNavigate(); // Función para navegación programática
  
+  const dispatch = useDispatch();
+  const allcharacter = useSelector((state) => state.allCharacters);
 
 
    
@@ -31,15 +35,7 @@ function App() {
 
    useEffect(()=>{
     //realiza un funcion asincronica get a la api rick and morty y lo almacena en el estado character
-    const URL_BASE = "https://rickandmortyapi.com/api/character";
-    axios.get(`${URL_BASE}`)
-    .then((response)=>{
-      console.log("respuesta", response)
-      setCharacters(response.data.results);
-    })
-    .catch((error)=>{
-      console.error(error);
-    })
+    dispatch(getCharacters());
   },[])
 
    // ! MANIPULADORES DE EVENTOS
@@ -88,6 +84,8 @@ function App() {
         confirmButtonText: 'OK'
       })
       setAccess(true);
+      localStorage.setItem('userData', JSON.stringify(userData));
+      setCharacters(allcharacter);
       navigate("/home");
     } catch (error) {
       console.log(error.response);

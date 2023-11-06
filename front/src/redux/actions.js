@@ -9,6 +9,7 @@ export const GET_CHARACTER_DETAIL = "GET_CHARACTER_DETAIL";
 export const CLEAN_DETAIL = "CLEAN_DETAIL";
 export const GET_FAVORITES = "GET_FAVORITES";
 export const LOGIN = "LOGIN";
+export const GET_CHARACTERS = "GET_CHARACTERS";
 
 /* 
    Las constantes anteriores se utilizan como tipos de acciones en Redux, 
@@ -20,6 +21,7 @@ export const LOGIN = "LOGIN";
 export const addFavorite = (id) => {
     return { type: "ADD", payload: id };
 };
+
 */
 //verificar si el usuario existe
 export const login = (email,password) =>{
@@ -30,6 +32,18 @@ export const login = (email,password) =>{
     return(response.data);
   }
 }
+
+export const getCharacters = ()=>{
+  return async function(dispatch){
+    try{
+      const URL_BASE = "https://rickandmortyapi.com/api/character"
+      const response = await axios.get(`${URL_BASE}`)
+      dispatch({ type: GET_CHARACTERS, payload: response.data });
+    }catch{
+      throw new Error('Error');
+    }
+  }
+} 
 
 //crear un usuario
 
@@ -74,7 +88,7 @@ export const getFavorites = () => {
     return async function (dispatch) {
         const URL_BASE = "http://localhost:3001";
         // Realiza una solicitud GET a la API para obtener la lista de favoritos
-        const response = await axios.get(`${URL_BASE}/rickandmorty/fav`);
+        const response = await axios.get(`${URL_BASE}/rickandmorty/getFav`);
         // Despacha la acción con la lista de favoritos como carga
         dispatch({ type: GET_FAVORITES, payload: response.data });
     };

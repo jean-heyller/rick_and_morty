@@ -2,10 +2,10 @@ const { Favorite, User } = require('../DB_connection');
 
 const postFav = async (req, res) => {
     try {
-        const { name, origin, image, species, gender, email } = req.body;
+        const { name,image, species, gender, email } = req.body;
 
         // Verifica si los datos requeridos están presentes
-        if (!name || !origin || !image || !species || !gender || !email) {
+        if (!name  || !image || !species || !gender || !email) {
             return res.status(401).json({ mensaje: 'Faltan datos' });
         }
 
@@ -18,7 +18,7 @@ const postFav = async (req, res) => {
         }
 
         // Crea un nuevo personaje favorito
-        const favorite = await Favorite.create({ name, origin, image, species, gender });
+        const favorite = await Favorite.create({ name, image, species, gender });
 
         // Agrega el personaje favorito al usuario
         await user.addFavorite(favorite);
