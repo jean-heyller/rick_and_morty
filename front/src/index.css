@@ -1,14 +1,21 @@
 body {
-  margin: 0;
-  background-position: center center;
-  background-image: url("https://i.ytimg.com/vi/jQzLjISEeas/maxresdefault.jpg");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  margin: 0; /* Elimina el margen alrededor del cuerpo */
+  height: 100vh; /* Asegura que el cuerpo tenga al menos la altura de la ventana del navegador */
 
+  /* Establece la imagen de fondo */
+  background-image: url("https://i.ytimg.com/vi/jQzLjISEeas/maxresdefault.jpg");
+
+  /* Asegura que la imagen de fondo cubra todo el cuerpo. Si la relación de aspecto de la imagen no coincide con la del cuerpo, partes de la imagen se cortarán */
+  background-size: cover;
+
+  /* Centra la imagen de fondo en el cuerpo */
+  background-position: center;
+
+  /* Evita que la imagen de fondo se repita */
+  background-repeat: no-repeat;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  /* Establece la fuente para los elementos de código a una fuente monoespaciada para una mejor legibilidad */
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
-

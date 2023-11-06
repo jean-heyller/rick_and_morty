@@ -6,7 +6,8 @@ const postUser = require('../controllers/postUser');
 const login = require('../controllers/login');
 const postFav = require('../controllers/postFav');
 const deleteFav = require('../controllers/deleteFav');
-const getUsers = require('../controllers/getUsers')
+const getUsers = require('../controllers/getUsers');
+const getFavorites = require('../controllers/getFavorites');
 
 
 const router = Router();
@@ -25,5 +26,6 @@ router.post('/rickandmorty/login', login);
 router.post('/rickandmorty/fav', postFav);
 router.get('/rickandmorty/fav', postFav);
 router.delete('/rickandmorty/fav/:id', deleteFav);
+router.get('/rickandmorty/getFav',getFavorites);
 
 module.exports = router;

@@ -2,7 +2,7 @@
     text-align: auto; 
     font-family: Comic Sans MS; 
     font-weight:bold; 
-    font-size: 30px; 
+    font-size: 20px; 
     color: #EBD758; 
     text-shadow: -1px 0 #414D68, 0 1px #414D68, 1px 0 #414D68, 0 -1px #414D68, -2px 2px 0 #414D68, 2px 2px 0 #414D68, 1px 1px #414D68, 2px 2px #414D68, 3px 3px #414D68, 4px 4px #414D68, 5px 5px #414D68, 6px 6px #414D68, 7px 7px #414D68, 8px 8px #414D68, 9px 9px #414D68;
 
@@ -11,16 +11,16 @@
     text-align: auto; 
     font-family: Comic Sans MS; 
     font-weight:bold; 
-    font-size: 30px; 
+    font-size: 20px; 
     color: #EBD758; 
     text-shadow: -1px 0 #414D68, 0 1px #414D68, 1px 0 #414D68, 0 -1px #414D68, -2px 2px 0 #414D68, 2px 2px 0 #414D68, 1px 1px #414D68, 2px 2px #414D68, 3px 3px #414D68, 4px 4px #414D68, 5px 5px #414D68, 6px 6px #414D68, 7px 7px #414D68, 8px 8px #414D68, 9px 9px #414D68;
 
 }
 .gender{
-    text-align: auto; 
+   
     font-family: Comic Sans MS; 
     font-weight:bold; 
-    font-size: 30px; 
+    font-size: 20px; 
     color: #EBD758; 
     text-shadow: -1px 0 #414D68, 0 1px #414D68, 1px 0 #414D68, 0 -1px #414D68, -2px 2px 0 #414D68, 2px 2px 0 #414D68, 1px 1px #414D68, 2px 2px #414D68, 3px 3px #414D68, 4px 4px #414D68, 5px 5px #414D68, 6px 6px #414D68, 7px 7px #414D68, 8px 8px #414D68, 9px 9px #414D68;
 
@@ -30,19 +30,18 @@
     border-radius: 60%;
 }
 .tarjeta{
-    border: 10px solid black;
+    border: 5px solid black;
     border-radius: 5%;
-    background-color: black;
+
 }
 .container{
     background-color:#a2c11c;
-    width: fit-content;
-    padding: 1em;
+
     border-radius: 10px;
     box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
     text-shadow: 6px 4px 7px rgba(0,0,0,0.6);
-    display: flex;
-    flex-direction: column;
+
+    
 }
 
 .closeButton{

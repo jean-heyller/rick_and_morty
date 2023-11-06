@@ -1,6 +1,13 @@
-    .tarjetas{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between; 
+.tarjetas {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; /* Permite que los elementos se envuelvan en nuevas líneas */
+  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+}
 
-    }
+.tarjetas > div {
+ /* Establece el ancho de los elementos hijos. 10px es para el margen, ajusta según sea necesario */
+  margin: 3px; /* Añade un poco de margen alrededor de los elementos */
+}

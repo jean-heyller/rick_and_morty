@@ -29,6 +29,19 @@ function App() {
       !access && navigate("/");
    }, [access]);
 
+   useEffect(()=>{
+    //realiza un funcion asincronica get a la api rick and morty y lo almacena en el estado character
+    const URL_BASE = "https://rickandmortyapi.com/api/character";
+    axios.get(`${URL_BASE}`)
+    .then((response)=>{
+      console.log("respuesta", response)
+      setCharacters(response.data.results);
+    })
+    .catch((error)=>{
+      console.error(error);
+    })
+  },[])
+
    // ! MANIPULADORES DE EVENTOS
 
    // Función para agregar un personaje a la lista de favoritos

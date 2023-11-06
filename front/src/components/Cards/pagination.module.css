@@ -1,0 +1,19 @@
+.cards {
+  display: flex; /* Establece el contenedor como un contenedor flexbox */
+  gap: 10px; /* Añade un espacio de 10px entre cada elemento hijo */
+  justify-items: center; /* Centra los elementos hijos a lo largo del eje principal (horizontal en este caso) */
+  align-items: center; /* Centra los elementos hijos a lo largo del eje transversal (vertical en este caso) */
+}
+
+.active {
+  background-color: #a75b5b; /* Establece el color de fondo del elemento activo a un tono de marrón */
+  color: rgb(17, 15, 15); /* Establece el color del texto del elemento activo a casi negro */
+}
+
+.buttons{
+  margin-bottom: 5px;
+}
+
+.buttonNav{
+  margin-top: 5px;
+}
