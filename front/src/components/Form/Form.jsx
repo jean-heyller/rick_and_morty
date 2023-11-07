@@ -3,7 +3,7 @@ import { useState } from "react";
 import validate from "./validation";
 import style from "./Form.module.css";
 
-export default function Form({onSubmit}){
+export default function Form({onSubmit,onRegister}){
 
     const [userData, setUserData] = useState({ email: '', password: '' });
     const [errors,setErrors] = useState({});
@@ -32,17 +32,31 @@ export default function Form({onSubmit}){
           onSubmit(userData);
         };
       };
+
+      function handleSubmitRegister(event) {
+        event.preventDefault();
+        const errors = validate(userData);
+        setErrors(errors);
+        if (Object.keys(errors).length === 0) {
+          console.log("funciono")
+          onRegister(userData);
+        };
+      };
+        
+      
     return(
         <div className={style.div}>
-            <form onSubmit={handleSubmit} className={style.form}>
-                <h1>Ingresar Usuario</h1>
-                <label className={style.email} htmlFor="email">email:</label>
-                <input onChange ={handleInputChange} value={userData.email}type="text" name="email" />
+            <form className={style.form}>
+                <label className={style.email} htmlFor="email">email</label>
+                <input className={style.input_email} onChange ={handleInputChange} value={userData.email}type="text" name="email" />
                 {errors.email && <span className="error">{errors.email}</span>}
-                <label className={style.password}htmlFor="password">password:</label>
+                <label className={style.password}htmlFor="password">password</label>
                 <input onChange ={handleInputChange} value={userData.password}type="text" name="password"/>
                 {errors.password && <span className="error">{errors.password}</span>}           
-                <button className ={style.btn}type="submit">LOGIN</button>     
+                <div className={style.buttons}>
+                <button className ={style.btn} onClick={handleSubmit} type="button">Login</button>     
+                <button className ={style.btn} onClick={handleSubmitRegister} type="button">Registrase</button> 
+                </div>
             </form>
         </div>
     );

@@ -27,18 +27,16 @@
     text-shadow: -1px 0 #414D68, 0 1px #414D68, 1px 0 #414D68, 0 -1px #414D68, -2px 2px 0 #414D68, 2px 2px 0 #414D68, 1px 1px #414D68, 2px 2px #414D68, 3px 3px #414D68, 4px 4px #414D68, 5px 5px #414D68, 6px 6px #414D68, 7px 7px #414D68, 8px 8px #414D68, 9px 9px #414D68;
 
 }
-.btn{
-	color: white;
-	font-family: 'Rubik One', sans-serif;
-	text-decoration: none;
-	font-size: 1vw;
-	background-color: #3498db;
-}
+
 .username, .password, .btn {
   display: block;
   margin-bottom: 10px;
 }
 
+.username{
+  margin-bottom: 5px;
+  margin-top: 50px;
+}
 .div{
   text-align: center;
 }
@@ -56,6 +54,31 @@
   /* otras propiedades... */
 }
 .btn{
-  margin-top: 15px;
+  margin-top: 5px;
+  font-family: Comic Sans MS;
+  background-color: transparent;
+  font-size: 18px;
+  border: none;
+  border-radius: 6px;
+  box-shadow: none;  
+  transition: background-color 0.3s ease;
+  color: #EBD758;
+  font-weight:bold;
+  text-shadow: -1px 0 #414D68, 0 1px #414D68, 1px 0 #414D68, 0 -1px #414D68, -2px 2px 0 #414D68, 2px 2px 0 #414D68, 1px 1px #414D68, 2px 2px #414D68, 3px 3px #414D68, 4px 4px #414D68, 5px 5px #414D68, 6px 6px #414D68, 7px 7px #414D68, 8px 8px #414D68, 9px 9px #414D68;  
+}
+
+.btn:hover {
+  background-color: #BEE2F9;
+  box-shadow: 1px 1px 3px 1px #BEE2F9;  
 }
 /* otras reglas... */
+.buttons{
+  display: flex;
+  gap: 3px;
+  background-color: none; 
+}
+
+.input_email{
+  margin-top: 10px;
+
+}

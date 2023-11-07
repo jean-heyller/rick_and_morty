@@ -23,15 +23,6 @@ export const addFavorite = (id) => {
 };
 
 */
-//verificar si el usuario existe
-export const login = (email,password) =>{
-  console.log("entro al login")
-  return async function(){
-    const URL_BASE = "http://localhost:3001";
-    const response = await axios.get(`${URL_BASE}/login?email=${email}&password=${password}`);
-    return(response.data);
-  }
-}
 
 export const getCharacters = ()=>{
   return async function(dispatch){

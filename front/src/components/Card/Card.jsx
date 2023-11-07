@@ -14,7 +14,6 @@ function Card({id, name,origin, species, gender, image, onClose, myFavorites }) 
       // Obtener los datos del usuario del almacenamiento local
     const userData = JSON.parse(localStorage.getItem('userData'));
     character.email = userData.email;
-    console.log(character)
       axios
          .post("http://localhost:3001/rickandmorty/fav", character)
          .then(console.log("todo ok"))
