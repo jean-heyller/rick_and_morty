@@ -4,7 +4,7 @@ import style from './Cards.module.css';
 import { getFavorites } from "../../redux/actions";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import Pagination from './pagination'; // Asegúrate de tener un componente de paginación
+import Pagination from '../pagination/pagination'; // Asegúrate de tener un componente de paginación
 
 export default function Cards({ characters, onClose }) {
   const dispatch = useDispatch();

@@ -1,17 +1,33 @@
 import { REMOVE_FAVORITE,FILTER_FAVORITE,ORDER_FAVORITE,
-  GET_FAVORITES,GET_CHARACTER_DETAIL,CLEAN_DETAIL,ADD_FAVORITE,GET_CHARACTERS
+  GET_FAVORITES,GET_CHARACTER_DETAIL,CLEAN_DETAIL,ADD_FAVORITE
+  ,GET_CHARACTERS,LOGIN,GET_USERS,
 } from "./actions";
 const initialState = {
     myFavorites: [],
+    backupFavorites: [],
     characterDetail: {},
     allCharacters: [],
+    user: {},
+    users:[],
+
 };
-const rootReducer = (state= initialState,action) =>{    
+const rootReducer = (state = initialState,action) =>{    
     switch(action.type){
+        case LOGIN:
+            return {
+                ...state,
+                user: action.payload,
+            };
+        case GET_USERS:
+            return {
+                ...state,
+                users: action.payload,
+            };
         case ADD_FAVORITE:
             return {
                 ...state,
                 myFavorites: [...state.myFavorites, action.payload],
+                backupFavorites: [...state.backupFavorites, action.payload]
             };
         case GET_CHARACTERS:
             return {
@@ -26,8 +42,8 @@ const rootReducer = (state= initialState,action) =>{
             )
             };
         case FILTER_FAVORITE:
-            const {myFavorites} = state
-            const favorites = myFavorites.filter(
+            const {backupFavorites} = state
+            const favorites = backupFavorites.filter(
                 (char)=>char.gender == action.payload)
             return{
                 ...state,

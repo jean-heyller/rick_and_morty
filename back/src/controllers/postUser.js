@@ -21,7 +21,7 @@ const postUser = async (req, res) => {
       });
 
         if (created) {
-            return res.status(201).json({msg: "usuario creado con exito"});
+            return res.status(201).json(usuario);
         } else {
             return res.status(400).json({msg: "usuario exitentes"});
         }

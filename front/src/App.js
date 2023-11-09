@@ -13,35 +13,76 @@ import About from "./components/About/About";
 import Detail from './components/Detail/Detail';
 import Form from './components/Form/Form';
 import Favorites from './components/Favorites/Favoristes';
-import { getCharacters } from "./redux/actions";
+import { getCharacters,login,getUsers } from "./redux/actions";
 import {userRequets} from "./components/functions/requests"
-// Corrección: Debe ser 'Favorites' en lugar de 'Favoritos'
+
 
 function App() {
    // ! HOOKS
-   const [characters, setCharacters] = useState([]); // Variable de estado para almacenar datos de personajes
-   const { pathname } = useLocation(); // Obtiene la ruta actual desde la URL
-   const [access, setAccess] = useState(false); // Variable de estado para gestionar el acceso del usuario
-   const navigate = useNavigate(); // Función para navegación programática
- 
+  const [characters, setCharacters] = useState([]); // Variable de estado para almacenar datos de personajes
+  const { pathname } = useLocation(); // Obtiene la ruta actual desde la URL
+  const [access, setAccess] = useState(false); // Variable de estado para gestionar el acceso del usuario
+  const navigate = useNavigate(); // Función para navegación programática
+  const [user, setUser] = useState({}); // Variable de estado para almacenar datos del usuario
+  const [users, setUsers] = useState([]); // Variable de estado para almacenar datos de usuarios
+
   const dispatch = useDispatch();
-  const allcharacter = useSelector((state) => state.allCharacters);
 
-  const {loginUser,registerUser} = userRequets();
+  useEffect(() => {
+    dispatch(getCharacters());
+    dispatch(getUsers());
+  }, []);
+
+ 
+  const allCharacters = useSelector((state) => state.allCharacters);
+  const allUsers = useSelector((state) => state.users);
+  const {verifyUser} = userRequets();
+
+  
+  
+  useEffect(() => {
+    console.log("se ejecuto")
+    setUsers(allUsers);
+    setCharacters(allCharacters);
+  }, [allUsers, allCharacters]);
 
 
-   
    useEffect(() => {
       // Redirige a la página de inicio de sesión si no se ha concedido acceso
       !access && navigate("/");
    }, [access]);
 
-   useEffect(()=>{
-    //realiza un funcion asincronica get a la api rick and morty y lo almacena en el estado character
-    dispatch(getCharacters());
-  },[])
+   
 
-   // ! MANIPULADORES DE EVENTOS
+   // Función para manejar el inicio de sesión del usuario
+   const loginUser = (userData) => {
+    const checkUser = verifyUser(userData,users)
+    if(checkUser === true){
+      setUser(userData);
+      setAccess(true);
+      navigate("/home");
+      Swal.fire({
+        title: '¡Éxito!',
+        text: 'Inicio de sesión exitoso',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      })
+    }else if(checkUser == 'Contraseña incorrecta'){
+      Swal.fire({
+        title: 'Error',
+        text: 'Contraseña incorrecta',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      })
+    }else{
+      Swal.fire({
+        title: 'Error',
+        text: 'Usuario no encontrado',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      })
+    }
+  }
 
    // Función para agregar un personaje a la lista de favoritos
    const onSearch = (id) => {
@@ -75,81 +116,25 @@ function App() {
       setCharacters(characters.filter((char) => char.id !== id));
    };
 
-   // Función para manejar el inicio de sesión del usuario
 
-
-   const login = (userData) => {
-    return async function(userData) {
-      try {
-        let response = await loginUser(userData);
-        setAccess(true);
-        localStorage.setItem('userData', JSON.stringify(userData));
-        setCharacters(allcharacter);
-        navigate("/home");
-      } catch (error) {
-        console.log(error.response);
-        if (error.response) {
-          switch (error.response.status) {
-            case 402:
-              Swal.fire({
-                title: 'Error',
-                text: 'Usuario no encontrado',
-                icon: 'error',
-                confirmButtonText: 'OK'
-              });
-              break;
-            case 403:
-              Swal.fire({
-                title: 'Error',
-                text: 'Contraseña incorrecta',
-                icon: 'error',
-                confirmButtonText: 'OK'
-              });
-              break;
-            default:
-              Swal.fire({
-                title: 'Error',
-                text: 'Algo salió mal',
-                icon: 'error',
-                confirmButtonText: 'OK'
-              });
-          }
-        }
-      }
-    }
-  }
 
   const register = (userData) => {
-    return async function(userData) {
-      try {
-        let response = await registerUser(userData);
-        console.log("respuesta",response);
-        Swal.fire({
-          title: '¡Éxito!',
-          text: 'Creado exitosamente',
-          icon: 'success',
-          confirmButtonText: 'OK'
-        })
-        setAccess(true);
-        navigate("/home");
-        setCharacters(allcharacter);
-        // ...resto del código...
-      } catch {
-        // ...manejo de errores...
-      }
-    }
+    dispatch(login(userData));
+    setAccess(true);
+    navigate("/home");
   }
+
    return (
    <div className='App' style={{ padding: '25px' }}>
-   {pathname !== "/" && <Nav onSearch={onSearch} />} 
+   {pathname !== "/" && <Nav onSearch={onSearch} />}
    <Routes>
-      <Route path='/' element= {<Form onSubmit={login()} onRegister={register()}/>}/> // Muestra el formulario de inicio de sesión en la página raíz
+      <Route path='/' element= {<Form onSubmit={loginUser} onRegister={register}/>}/> // Muestra el formulario de inicio de sesión en la página raíz
       <Route path="/home" element= {<Cards characters={characters} onClose={onClose} />}/> // Muestra la lista de personajes en la página de inicio
       <Route path='/favorites' element = {<Favorites />} /> // Muestra la página de favoritos
       <Route path='/About' element = {<About />} /> // Muestra la página de Acerca de
       <Route path='detail/:detailId' element={<Detail/>}/> // Muestra la página de detalle para un personaje específico
    </Routes>
-   
+
    </div>
    );
 };

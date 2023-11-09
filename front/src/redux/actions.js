@@ -10,20 +10,54 @@ export const CLEAN_DETAIL = "CLEAN_DETAIL";
 export const GET_FAVORITES = "GET_FAVORITES";
 export const LOGIN = "LOGIN";
 export const GET_CHARACTERS = "GET_CHARACTERS";
+export const GET_USERS = "GET_USERS";
 
 /* 
    Las constantes anteriores se utilizan como tipos de acciones en Redux, 
    para describir el tipo de acción que se está realizando en la aplicación.
 */
 
-// Acción para agregar un favorito (actualmente comentada)
-/* 
-export const addFavorite = (id) => {
-    return { type: "ADD", payload: id };
+// Acción para iniciar sesión
+export const login = (userData) => {
+    return async function (dispatch) {
+        try {
+            const URL_BASE = "http://localhost:3001";
+            const response = await axios.post(`${URL_BASE}/rickandmorty/user?`, userData);
+            dispatch({ type: LOGIN, payload: response.data });
+        }
+        catch {
+            throw new Error("Error");
+        }
+    }
+}
+
+
+//acción asincrónixa para traer todos los usuarios
+export const getUsers = ()=>{
+  return async function(dispatch){
+    try{
+      const URL_BASE = "http://localhost:3001";
+      const response = await axios.get(`${URL_BASE}/rickandmorty/users?`);
+      dispatch({type:GET_USERS, payload:response.data});
+    }catch{
+      throw new Error('Error');
+    }
+  }
+}
+
+// Acción asincrónica para agregar un favorito
+export const addFavorite = (userData) => {
+    return async function (dispatch) {
+        const URL_BASE = "http://localhost:3001";
+        // Realiza una solicitud GET a la API para obtener los detalles del personaje
+        const response = await axios.post(`${URL_BASE}/rickandmorty/fav?`, userData);
+        // Despacha la acción con los detalles del personaje como carga
+        dispatch({ type: ADD_FAVORITE, payload: response.data });
+    };
 };
 
-*/
 
+// obtiene todos los usuarios de la api de rick and morty
 export const getCharacters = ()=>{
   return async function(dispatch){
     try{
@@ -42,7 +76,7 @@ export const createUser = (user) =>{
   return async function(dispatch){
     const URL_BASE = "http://localhost:3001";
     const response = await axios.post(`${URL_BASE}/user`,user);
-    return(response.data);
+    dispatch({type:LOGIN, payload:response.data});
   }
 }
 
