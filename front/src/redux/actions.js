@@ -1,4 +1,5 @@
 import axios from "axios";
+import e from "cors";
 
 // Definición de constantes para tipos de acciones
 export const ADD_FAVORITE = "ADD_FAVORITE";
@@ -46,11 +47,11 @@ export const getUsers = ()=>{
 }
 
 // Acción asincrónica para agregar un favorito
-export const addFavorite = (userData) => {
+export const addFavorite = (character) => {
     return async function (dispatch) {
         const URL_BASE = "http://localhost:3001";
         // Realiza una solicitud GET a la API para obtener los detalles del personaje
-        const response = await axios.post(`${URL_BASE}/rickandmorty/fav?`, userData);
+        const response = await axios.post(`${URL_BASE}/rickandmorty/fav?`, character);
         // Despacha la acción con los detalles del personaje como carga
         dispatch({ type: ADD_FAVORITE, payload: response.data });
     };
@@ -58,17 +59,22 @@ export const addFavorite = (userData) => {
 
 
 // obtiene todos los usuarios de la api de rick and morty
-export const getCharacters = ()=>{
-  return async function(dispatch){
-    try{
-      const URL_BASE = "https://rickandmortyapi.com/api/character"
-      const response = await axios.get(`${URL_BASE}`)
+export const getCharacters = (page) => {
+  return async function(dispatch) {
+    const URL_BASE = "https://rickandmortyapi.com/api/character"
+    try {
+      const response = await axios.get(page === 1 ? URL_BASE : `${URL_BASE}?page=${page}`);
       dispatch({ type: GET_CHARACTERS, payload: response.data });
-    }catch{
-      throw new Error('Error');
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        throw new Error('Error de red al intentar obtener datos.');
+      } else {
+        throw new Error('Error desconocido al obtener datos.');
+      }
     }
-  }
-} 
+  };
+};
+
 
 //crear un usuario
 
@@ -80,10 +86,7 @@ export const createUser = (user) =>{
   }
 }
 
-// Acción para eliminar un favorito
-export const removeFavorite = (id) => {
-    return { type: "REMOVE_FAVORITE", payload: id };
-};
+
 
 //verificar usuario
 
@@ -118,6 +121,17 @@ export const getFavorites = () => {
         dispatch({ type: GET_FAVORITES, payload: response.data });
     };
 };
+
+// Acción para eliminar un favorito de un usuario
+export const deleteFav = (id, email) => {
+    return async function (dispatch) {
+        const URL_BASE = "http://localhost:3001";
+        // Realiza una solicitud DELETE a la API para eliminar el favorito
+        const response = await axios.delete(`${URL_BASE}/rickandmorty/fav?id=${id}&email=${email}`);
+        // Despacha la acción con la lista de favoritos como carga
+        dispatch({ type: REMOVE_FAVORITE, payload: response.data });
+    };
+}
 
 // Acción para limpiar los detalles de un personaje
 export const cleanDetail = () => {

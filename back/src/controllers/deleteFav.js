@@ -1,20 +1,24 @@
-const { Favorite } = require('../DB_connection');
+const { Favorite,User } = require('../DB_connection');
 
 const deleteFav = async (req, res) => {
     try {
-        const { id } = req.params;
+        // Obtiene el ID del personaje  y el usuario del query de la solicitud
+        const { id, email } = req.query;
 
-        // Elimina el personaje favorito con el ID proporcionado
+        //Busca al usuario en la base de datos
+        const user = await User.findOne({ where: { email } });
+
+        //Elimina el personaje favorito del usuario
+         await user.removeFavorite(id);
+
+        //  Elimina el personaje favorito con el ID proporcionado
         await Favorite.destroy({ where: { id: id } });
 
-        // Busca todos los personajes favoritos guardados en la base de datos
-        const favoritos = await Favorite.findAll();
-
         // Responde con el arreglo de personajes favoritos
-        return res.status(200).json(favoritos);
+        return res.status(200).json(id);
     } catch (error) {
         console.error(error);
-        return res.status(500).json({ mensaje: 'Hubo un error al eliminar el personaje favorito' });
+        return res.status(500).json({ mensaje: error.message });
     }
 };
 

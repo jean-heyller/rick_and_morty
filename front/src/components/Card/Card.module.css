@@ -1,5 +1,6 @@
 .name{
-    text-align: auto; 
+    text-align: center;
+    justify-content: center;
     font-family: Comic Sans MS; 
     font-weight:bold; 
     font-size: 20px; 
@@ -25,24 +26,17 @@
     text-shadow: -1px 0 #414D68, 0 1px #414D68, 1px 0 #414D68, 0 -1px #414D68, -2px 2px 0 #414D68, 2px 2px 0 #414D68, 1px 1px #414D68, 2px 2px #414D68, 3px 3px #414D68, 4px 4px #414D68, 5px 5px #414D68, 6px 6px #414D68, 7px 7px #414D68, 8px 8px #414D68, 9px 9px #414D68;
 
 }
-.image{
-    border: 1px solid red;
-    border-radius: 60%;
+.imagen {
+  max-width: 100%;
+  height: auto;
 }
 .tarjeta{
     border: 5px solid black;
     border-radius: 5%;
 
 }
-.container{
-    background-color:#a2c11c;
 
-    border-radius: 10px;
-    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
-    text-shadow: 6px 4px 7px rgba(0,0,0,0.6);
 
-    
-}
 
 .closeButton{
     border:0px;
@@ -55,5 +49,15 @@
 }
 
 .closeButton:hover{
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
+.tarjeta{
+    border: 5px solid black;
+    border-radius: 5%;
+
+    width: 22%;   
+}
+
+.tarjeta:hover{
     box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
 }

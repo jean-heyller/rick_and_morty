@@ -1,13 +1,25 @@
-.tarjetas {
+
+
+.cards {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap; /* Permite que los elementos se envuelvan en nuevas líneas */
+  flex-wrap: wrap;
   justify-content: space-between;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  gap: 10px;
 }
 
-.tarjetas > div {
- /* Establece el ancho de los elementos hijos. 10px es para el margen, ajusta según sea necesario */
-  margin: 3px; /* Añade un poco de margen alrededor de los elementos */
+.active {
+  background-color: #a75b5b; /* Establece el color de fondo del elemento activo a un tono de marrón */
+  color: rgb(17, 15, 15); /* Establece el color del texto del elemento activo a casi negro */
+}
+
+.buttons{
+  margin-top: 5px;
+  display: flex;
+  justify-content: center;
+  gap: 3px;
+}
+
+.buttonNav{
+  margin-top: 5px;
 }

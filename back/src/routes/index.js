@@ -25,7 +25,7 @@ router.get('/rickandmorty/users',getUsers);
 router.post('/rickandmorty/login', login);
 router.post('/rickandmorty/fav', postFav);
 router.get('/rickandmorty/fav', postFav);
-router.delete('/rickandmorty/fav/:id', deleteFav);
+router.delete('/rickandmorty/fav', deleteFav);
 router.get('/rickandmorty/getFav',getFavorites);
 
 module.exports = router;

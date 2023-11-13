@@ -13,7 +13,7 @@ import About from "./components/About/About";
 import Detail from './components/Detail/Detail';
 import Form from './components/Form/Form';
 import Favorites from './components/Favorites/Favoristes';
-import { getCharacters,login,getUsers } from "./redux/actions";
+import { getCharacters,login,getUsers,getFavorites } from "./redux/actions";
 import {userRequets} from "./components/functions/requests"
 
 

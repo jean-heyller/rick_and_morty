@@ -9,6 +9,7 @@ const initialState = {
     allCharacters: [],
     user: {},
     users:[],
+    count: 0,
 
 };
 const rootReducer = (state = initialState,action) =>{    
@@ -33,13 +34,13 @@ const rootReducer = (state = initialState,action) =>{
             return {
                 ...state,
                 allCharacters: action.payload.results,
+                count: action.payload.info.count,
             };    
         case REMOVE_FAVORITE:
         return {
             ...state,
-            myFavorites:state.myFavorites.filter(
-                (char)=>char.id !==action.payload   
-            )
+            myFavorites:state.myFavorites.filter((char)=>char.id !== action.payload),
+            backupFavorites:state.myFavorites.filter((char)=>char.id !== action.payload)
             };
         case FILTER_FAVORITE:
             const {backupFavorites} = state
@@ -50,7 +51,8 @@ const rootReducer = (state = initialState,action) =>{
                 myFavorites:favorites,
             };
         case ORDER_FAVORITE:
-        const orderedFavorites = state.allCharacters.sort((a, b) =>
+        const copy = [...state.myFavorites]
+        const orderedFavorites = copy.sort((a, b) =>
         action.payload === 'Ascendente' ? a.id - b.id : b.id - a.id)
             return{
                 ...state,
@@ -67,7 +69,7 @@ const rootReducer = (state = initialState,action) =>{
                 characterDetail: {},
             };
         case GET_FAVORITES:
-            return { ...state, myFavorites: action.payload };
+            return { ...state, myFavorites: action.payload, backupFavorites: action.payload };
         default:
             return { ...state };
     };
